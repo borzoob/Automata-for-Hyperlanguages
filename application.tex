@@ -1,0 +1,81 @@
+\section{Hyper Regular Expressions and Application in Security}
+
+It is straightforward to see that the underlying NFM of an NHF defines a 
+regular expression over hyperwords. Such a regular expression along with the 
+quantification of the NHF constitutes a {\em hyper regular expression} 
+(HRE). For example, consider the left NHF $\A_1$. The HRE of this NHF is the 
+following:
+%
+$$
+\forall x_1\forall x_2\Big((a, a) \mid (b, b)\Big)^*\Big((\#, b)^* \mid (b, 
+\#)^* \Big)
+$$
+%
+We now show the application of HREs in specifying information-flow 
+security policies.
+
+{\em Noninteference}~\cite{gm82} requires that commands issued by users holding 
+high clearances be removable without affecting observations of users holding 
+low clearances:
+%
+$$
+\varphi_{\mathsf{ni}} = \forall x_1.\exists x_2.(l, l\lambda)^*
+$$
+%
+where $l$ denotes a low state and $l\lambda$ denotes a low state where all high 
+commands are replaced by a dummy value $\lambda$.
+
+{\em Observational determinism}~\cite{zm03} requires that if two executions of 
+a system start in low-equivalent states, then these execution should remain low 
+equivalent:
+%
+$$
+\varphi_{\mathsf{od}} = \forall x_1.\forall x_2. (l, l)^+ + (\bar{l}, 
+\bar{l})(\$, \$)^* + (l, \bar{l})(\$, \$)^* + (\bar{l}, l)(\$, \$)^*
+$$
+%
+where $l$ denotes a low state, $\bar{l} \in \Sigma - \{l\}$, and $\$ \in 
+\Sigma$. We note that similar polices such as {\em Boudol and Castellani’s 
+noninterference}~\cite{bd02} can be formulated in the same 
+fashion\footnote{This policy states that any two executions that start from 
+bisimilar states (in terms of memory low-observability, should remain 
+bisimilarly low-observable.}.
+
+{\em Generalized noninterference} (GNI)~\cite{m88} allows nondeterminism in 
+the low-observable behavior, but requires that low-security outputs may 
+not be altered by the injection of high-security inputs:
+%
+$$
+\varphi_{\mathsf{gni}} = \forall x_1.\forall x_2.\exists x_3. \bigg((h, l, hl) 
++ (\bar{h}, l, \bar{h}l) + (h, \bar{l}, h\bar{l}) + (\bar{h}, \bar{l}, 
+\bar{h}\bar{l}) \bigg)^*
+$$
+%
+where $h$ denotes the high input, $l$ denotes the low output, $\bar{l} \in 
+\Sigma -\{l\}$, and $\bar{h} \in \Sigma - \{h\}$.
+
+{\em Declassification}~\cite{ss00} relaxes noninterference by allowing leaking 
+information when necessary. Some programs need to reveal secret information to 
+fulfill functional requirements. For example, a password checker must reveal 
+whether the entered password is correct or not:
+%
+$$
+\varphi_{\mathsf{dc}} = \forall x_1.\forall x_2. (li,li)(pw, pw)(lo, lo)^+
+$$
+%
+where $li$ denotes low-input state, $pw$ denotes that the password is correct, 
+and $lo$ denotes low-output states. We note that for brevity, in the above 
+formula, we do not include behaviors where the first two events are not low or 
+in the second event, the password in not valid. 
+
+{\em Termination-sensitive noninterference} requires that for two executions 
+that
+ start from low-observable states, information leaks are not permitted by 
+the program's termination behavior:
+%
+$$
+\varphi_{\mathsf{tsni}} = \forall x_1.\forall x_2. (l, l)(\$, \$)^*(l, l)  + 
+(\bar{l}, \bar{l})(\$, \$)^* + (l, \bar{l})(\$, \$)^* + (\bar{l}, l)(\$, \$)^*
+$$
+where $l$ denotes a low state and $\$ \in \Sigma$.
+

@@ -1,0 +1,20 @@
+\subsection{Hyperautomata over Hyper-infinite Words}
+
+We now lift the notion of hyperautomata to infinite words. 
+A {\em hyper-infinite word} over $\Sigma$ is a set of infinite words over $\Sigma$. 
+As before, an automaton $\A$ for a hyperlanguage $\cal L$ consists of an underlying automaton which runs on the tuples of words that are assigned to the word variables of $\A$. In the case of hyper-infinite words, the underlying automaton runs on tuples of infinite words. We consider a B{\"u}chi acceptance condition for the underlying automata. 
+
+\begin{definition}
+A {\em nondeterministic B{\"u}chi hyper-word automaton (NBH)} is a tuple $\A = 
+\tuple{\Sigma, X=\{x_1,\ldots x_k\}, Q, Q_0, \delta, F, \alpha}$, where all 
+elements are as in NFH and acceptance condition defined by the underlying NBW 
+of $\A$ is $\hat{\A} = \tuple{\Sigma^k,Q,Q_0,\delta,F}$.
+
+\end{definition}
+
+In particular, consider a hyper-infinite word $S$ and an 
+assignment $v:X\rightarrow S$. Then $\hat\A$ accepts $\zip(v)$ iff the run of 
+$\hat\A$ on $\zip(v)$ visits some state in $F$ infinitely often. 
+The definition of $\models$, acceptance, and $\lang{A}$ are all as in NFH.
+As with NFH, we consider the different fragments of NBH$_\forall$, NBH$_\exists$, NBH$_{\forall\exists}$ and NBH$_{\exists\forall}$.
+
